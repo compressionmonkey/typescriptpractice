@@ -1,0 +1,19 @@
+{
+  "name": "typescriptpractice",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "tsc app.ts && node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/compressionmonkey/typescriptpractice.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/compressionmonkey/typescriptpractice/issues"
+  },
+  "homepage": "https://github.com/compressionmonkey/typescriptpractice#readme"
+}
