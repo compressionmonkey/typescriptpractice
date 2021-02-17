@@ -1,8 +1,12 @@
-var HelloWorld = /** @class */ (function () {
-    function HelloWorld(message) {
-        console.log(message);
+var Customer = /** @class */ (function () {
+    function Customer(fname, lname) {
+        this.firstName = fname;
+        this.lastName = lname;
     }
-    return HelloWorld;
+    return Customer;
 }());
-var helloWorld = new HelloWorld('Welcome');
-console.log(helloWorld);
+function customerLogger(customer) {
+    console.log(customer.firstName + " " + customer.lastName);
+}
+var customer = new Customer('Jane', 'Doe');
+customerLogger(customer); //compiler error
