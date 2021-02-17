@@ -1,12 +1,11 @@
-var Customer = /** @class */ (function () {
-    function Customer(fname, lname) {
-        this.firstName = fname;
-        this.lastName = lname;
+var p = { first: '10k', second: 1000 };
+console.log(p);
+var c = {
+    id: Math.random().toString(36),
+    run: function () {
+        return 3;
     }
-    return Customer;
-}());
-function customerLogger(customer) {
-    console.log(customer.firstName + " " + customer.lastName);
-}
-var customer = new Customer('Jane', 'Doe');
-customerLogger(customer); //compiler error
+};
+console.log('hay', Math.random());
+console.log(c.id);
+console.log(c.run());
