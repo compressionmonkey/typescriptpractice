@@ -1,11 +1,25 @@
-var p = { first: '10k', second: 1000 };
-console.log(p);
-var c = {
-    id: Math.random().toString(36),
-    run: function () {
-        return 3;
+var List = /** @class */ (function () {
+    function List() {
+        this.data = [];
     }
-};
-console.log('hay', Math.random());
-console.log(c.id);
-console.log(c.run());
+    List.prototype.add = function (t) {
+        this.data.push(t);
+    };
+    List.prototype.remove = function (t) {
+        var index = this.data.indexOf(t);
+        if (index > -1) {
+            this.data.splice(index, 1);
+        }
+    };
+    List.prototype.asArray = function () {
+        return this.data;
+    };
+    return List;
+}());
+var numbers = new List();
+numbers.add(11);
+numbers.add(12);
+numbers.add(13);
+numbers.remove(12);
+var numArray = numbers.asArray();
+console.log(numArray);
