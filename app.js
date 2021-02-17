@@ -1,25 +1,21 @@
-var List = /** @class */ (function () {
-    function List() {
-        this.data = [];
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+function log(target, key, descriptor) {
+    console.log(key + " was called");
+}
+var Calculator = /** @class */ (function () {
+    function Calculator() {
     }
-    List.prototype.add = function (t) {
-        this.data.push(t);
+    // using the decorator @log
+    Calculator.prototype.square = function (n) {
+        return n * n;
     };
-    List.prototype.remove = function (t) {
-        var index = this.data.indexOf(t);
-        if (index > -1) {
-            this.data.splice(index, 1);
-        }
-    };
-    List.prototype.asArray = function () {
-        return this.data;
-    };
-    return List;
+    __decorate([
+        log
+    ], Calculator.prototype, "square", null);
+    return Calculator;
 }());
-var numbers = new List();
-numbers.add(11);
-numbers.add(12);
-numbers.add(13);
-numbers.remove(12);
-var numArray = numbers.asArray();
-console.log(numArray);

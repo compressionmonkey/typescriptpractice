@@ -4,7 +4,8 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "tsc app.ts && node app.js"
+    "test": "tsc app.ts && node app.js",
+    "dev": "tsc --target ES5 --experimentalDecorators app.ts && node app.js"
   },
   "repository": {
     "type": "git",
