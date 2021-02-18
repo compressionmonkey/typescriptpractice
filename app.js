@@ -5,12 +5,27 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 function log(target, key, descriptor) {
-    console.log(key + " was called");
+    console.log(target, key, descriptor);
+    var original = descriptor.value;
+    console.log('original', original);
+    descriptor.value = function () {
+        var args = [];
+        for (var _i = 0; _i < arguments.length; _i++) {
+            args[_i] = arguments[_i];
+        }
+        // calls the original method
+        var result = original.apply(this, args);
+        console.log('hay', result, args);
+        // log the call and the result
+        console.log(key + " with args " + JSON.stringify(args) + " returned\n            " + JSON.stringify(result));
+        // return the result
+        return result;
+    };
+    return descriptor;
 }
 var Calculator = /** @class */ (function () {
     function Calculator() {
     }
-    // using the decorator @log
     Calculator.prototype.square = function (n) {
         return n * n;
     };
@@ -19,3 +34,6 @@ var Calculator = /** @class */ (function () {
     ], Calculator.prototype, "square", null);
     return Calculator;
 }());
+var calcuator = new Calculator();
+calcuator.square(2);
+calcuator.square(3);
