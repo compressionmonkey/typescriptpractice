@@ -4,36 +4,61 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-function log(target, key, descriptor) {
-    console.log(target, key, descriptor);
-    var original = descriptor.value;
-    console.log('original', original);
-    descriptor.value = function () {
-        var args = [];
-        for (var _i = 0; _i < arguments.length; _i++) {
-            args[_i] = arguments[_i];
-        }
-        // calls the original method
-        var result = original.apply(this, args);
-        console.log('hay', result, args);
-        // log the call and the result
-        console.log(key + " with args " + JSON.stringify(args) + " returned\n            " + JSON.stringify(result));
-        // return the result
-        return result;
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
+function property(target, key) {
+    var value = target[key];
+    // Replacement getter
+    var getter = function () {
+        console.log("Getter for " + key + " returned " + value);
+        return value;
     };
-    return descriptor;
-}
-var Calculator = /** @class */ (function () {
-    function Calculator() {
+    // Replacement setter
+    var setter = function (newVal) {
+        console.log("Set " + key + " to " + newVal);
+        value = newVal;
+    };
+    // Replace the property
+    var isDeleted = delete this[key];
+    if (isDeleted) {
+        Object.defineProperty(target, key, {
+            get: getter,
+            set: setter,
+            enumerable: true,
+            configurable: true
+        });
     }
-    Calculator.prototype.square = function (n) {
-        return n * n;
+}
+function parameterDecorator(target, key, index) {
+    console.log("Key is " + key + " and index is " + index);
+}
+function model(constructor) {
+    console.log(constructor);
+}
+var Person = /** @class */ (function () {
+    function Person() {
+    }
+    Person.prototype.calculateSalary = function (taxes, discount) {
+        return this.salary * taxes;
     };
     __decorate([
-        log
-    ], Calculator.prototype, "square", null);
-    return Calculator;
+        property
+    ], Person.prototype, "firstName", void 0);
+    __decorate([
+        property
+    ], Person.prototype, "salary", void 0);
+    __decorate([
+        __param(0, parameterDecorator),
+        __param(1, parameterDecorator)
+    ], Person.prototype, "calculateSalary", null);
+    Person = __decorate([
+        model
+    ], Person);
+    return Person;
 }());
-var calcuator = new Calculator();
-calcuator.square(2);
-calcuator.square(3);
+var person = new Person();
+// set the firstName
+person.firstName = 'Haider';
+// call the getter
+console.log(person.firstName);
